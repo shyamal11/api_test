@@ -1,0 +1,30 @@
+name: Generate Name and Save to MongoDB
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name to greet and save'
+        required: true
+        default: 'Friend'
+
+jobs:
+  save_to_mongodb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install MongoDB Python Driver
+        run: pip install pymongo
+
+      - name: Run Python script to save name to MongoDB
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          NAME: ${{ github.event.inputs.name }}
+        run: python save_to_mongodb.py
