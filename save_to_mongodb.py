@@ -10,7 +10,7 @@ def save_to_mongodb(name):
     client = MongoClient(mongo_uri)
     try:
         db = client['test']  # Replace 'test' with your database name
-        collection = db['greetings']  # Replace 'greetings' with your collection name
+        collection = db['test']  # Replace 'greetings' with your collection name
         
         doc = {
             "name": name,
