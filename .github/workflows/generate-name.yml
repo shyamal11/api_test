@@ -37,5 +37,7 @@ jobs:
           MONGO_URI: ${{ secrets.MONGO_URI }}  # MongoDB URI secret
           SPEECH_KEY: ${{ secrets.SPEECH_KEY }}  # Azure Speech API Key
           SPEECH_REGION: ${{ secrets.SPEECH_REGION }}  # Azure Speech Region
+          EPISODE_ID: ${{ github.event.inputs.episode_id }}
+          PROMPT: ${{ github.event.inputs.prompt }}
         run: |
-          python synthesize_speech.py ${{ github.event.inputs.episode_id }} "${{ github.event.inputs.prompt }}"
+          python synthesize_speech.py 

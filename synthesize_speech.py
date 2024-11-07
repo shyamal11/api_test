@@ -160,24 +160,42 @@ def save_audio_to_file(audio_data, filename="final_audio.mp3",  bitrate="24k", s
 
 
 
-if __name__ == "__main__":
-    # Check if we have the correct number of arguments
-    if len(sys.argv) != 3:
-        print("Usage: python synthesize_speech.py <episode_id> <prompt>")
-        sys.exit(1)
+# if __name__ == "__main__":
+#     # Check if we have the correct number of arguments
+#     if len(sys.argv) != 3:
+#         print("Usage: python synthesize_speech.py <episode_id> <prompt>")
+#         sys.exit(1)
 
-    # Get episode_id and prompt from command-line arguments
-    episode_id = sys.argv[1]  # First argument: episode ID
-    prompt = sys.argv[2]  # Second argument: speech prompt
+#     # Get episode_id and prompt from command-line arguments
+#     episode_id = sys.argv[1]  # First argument: episode ID
+#     prompt = sys.argv[2]  # Second argument: speech prompt
 
-    # Step 1: Synthesize the text to audio in memory
-    podcast_data = synthesize_speech(prompt)
+#     # Step 1: Synthesize the text to audio in memory
+#     podcast_data = synthesize_speech(prompt)
     
+#     if podcast_data is None:
+#         print("Error in synthesizing speech. Audio will not be saved.")
+#     else:
+#         # Step 2: The audio has already been saved to a local file for testing
+#         print("Audio saved locally for testing.")
+        
+#         # Step 3: Optionally save to MongoDB if required
+#         save_audio_to_mongo(podcast_data, episode_id)  # Pass episode_id directly
+
+
+
+if __name__ == "__main__":
+    episode_id = os.getenv("EPISODE_ID")
+    prompt = os.getenv("PROMPT")
+
+    print("Calling text to spech")
+    podcast_data = synthesize_speech(prompt)
+
     if podcast_data is None:
         print("Error in synthesizing speech. Audio will not be saved.")
     else:
-        # Step 2: The audio has already been saved to a local file for testing
-        print("Audio saved locally for testing.")
-        
-        # Step 3: Optionally save to MongoDB if required
-        save_audio_to_mongo(podcast_data, episode_id)  # Pass episode_id directly
+        print("storing in db")
+        save_audio_to_mongo(podcast_data, episode_id) 
+
+
+  

@@ -6,7 +6,7 @@ from bson import Binary
 import os
 
 mongo_uri = os.getenv("MONGO_URI")
-client = MongoClient(mongo_uri)
+client = MongoClient("mongodb+srv://shyamal116:bstisdcan1S@cluster0.8awyqnb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client["test"]
 collection = db["test"]
 
@@ -39,5 +39,5 @@ def fetch_and_play_audio(audio_id):
     play_obj.wait_done()
 
 # Example usage
-audio_id = "Alice"  # Replace with your actual ID stored in MongoDB
+audio_id = "123"  # Replace with your actual ID stored in MongoDB
 fetch_and_play_audio(audio_id)
