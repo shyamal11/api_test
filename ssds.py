@@ -6,7 +6,7 @@ from bson import Binary
 import os
 
 mongo_uri = os.getenv("MONGO_URI")
-client = MongoClient("mongodb+srv://shyamal116:bstisdcan1S@cluster0.8awyqnb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+client = MongoClient(mongo_uri)
 db = client["test"]
 collection = db["test"]
 
